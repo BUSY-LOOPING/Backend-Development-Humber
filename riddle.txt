@@ -1,0 +1,10 @@
+if any number > 30 :
+	if remaining both > 12 :
+		ambigious
+	else :
+		Non ambigious
+else :
+	ambigious
+
+
+12-01-33
