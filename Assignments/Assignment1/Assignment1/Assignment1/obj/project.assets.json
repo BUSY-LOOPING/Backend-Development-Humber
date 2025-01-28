@@ -447,23 +447,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dhruv\\.nuget\\packages\\": {},
+    "C:\\Users\\dhruv\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\C# Projects\\Assignment1\\Assignment1\\Assignment1.csproj",
+      "projectUniqueName": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\Assignment1.csproj",
       "projectName": "Assignment1",
-      "projectPath": "C:\\C# Projects\\Assignment1\\Assignment1\\Assignment1.csproj",
-      "packagesPath": "C:\\Users\\Dhruv\\.nuget\\packages\\",
-      "outputPath": "C:\\C# Projects\\Assignment1\\Assignment1\\obj\\",
+      "projectPath": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\Assignment1.csproj",
+      "packagesPath": "C:\\Users\\dhruv\\.nuget\\packages\\",
+      "outputPath": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Dhruv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dhruv\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Web Dev\\Back End Development\\Assignments\\Assignment0\\Assignment0\\Task1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FCA8AB7E-EF61-4C47-B844-C4895FEF0E7C}|Assignment0\\Assignment0.csproj|c:\\web dev\\back end development\\assignments\\assignment0\\assignment0\\task1\\assignment0\\assignment0.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FCA8AB7E-EF61-4C47-B844-C4895FEF0E7C}|Assignment0\\Assignment0.csproj|solutionrelative:assignment0\\assignment0.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Assignment0.csproj",
+              "DocumentMoniker": "C:\\Web Dev\\Back End Development\\Assignments\\Assignment0\\Assignment0\\Task1\\Assignment0\\Assignment0.csproj",
+              "RelativeDocumentMoniker": "Assignment0\\Assignment0.csproj",
+              "ToolTip": "C:\\Web Dev\\Back End Development\\Assignments\\Assignment0\\Assignment0\\Task1\\Assignment0\\Assignment0.csproj",
+              "RelativeToolTip": "Assignment0\\Assignment0.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-10T20:28:02.094Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,17 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\C# Projects\\Assignment1\\",
+  "WorkspaceRootPath": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|c:\\c# projects\\assignment1\\assignment1\\controllers\\cubecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|solutionrelative:assignment1\\controllers\\cubecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|c:\\web dev\\backend-development-humber\\assignments\\assignment1\\assignment1\\assignment1\\controllers\\knockknockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|solutionrelative:assignment1\\controllers\\knockknockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|c:\\c# projects\\assignment1\\assignment1\\controllers\\greetingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|solutionrelative:assignment1\\controllers\\greetingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|c:\\c# projects\\assignment1\\assignment1\\controllers\\welcomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|c:\\web dev\\backend-development-humber\\assignments\\assignment1\\assignment1\\assignment1\\controllers\\welcomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{03AAB4DA-39DD-454E-97EF-07069F56BAD0}|Assignment1\\Assignment1.csproj|solutionrelative:assignment1\\controllers\\welcomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,45 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CubeController.cs",
-              "DocumentMoniker": "C:\\C# Projects\\Assignment1\\Assignment1\\Controllers\\CubeController.cs",
-              "RelativeDocumentMoniker": "Assignment1\\Controllers\\CubeController.cs",
-              "ToolTip": "C:\\C# Projects\\Assignment1\\Assignment1\\Controllers\\CubeController.cs",
-              "RelativeToolTip": "Assignment1\\Controllers\\CubeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T00:48:24.666Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GreetingsController.cs",
-              "DocumentMoniker": "C:\\C# Projects\\Assignment1\\Assignment1\\Controllers\\GreetingsController.cs",
-              "RelativeDocumentMoniker": "Assignment1\\Controllers\\GreetingsController.cs",
-              "ToolTip": "C:\\C# Projects\\Assignment1\\Assignment1\\Controllers\\GreetingsController.cs",
-              "RelativeToolTip": "Assignment1\\Controllers\\GreetingsController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAcwBEAAAAVAAAAAAAAAA==",
+              "Title": "WelcomeController.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\Controllers\\WelcomeController.cs",
+              "RelativeDocumentMoniker": "Assignment1\\Controllers\\WelcomeController.cs",
+              "ToolTip": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\Controllers\\WelcomeController.cs",
+              "RelativeToolTip": "Assignment1\\Controllers\\WelcomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T00:08:41.384Z",
+              "WhenOpened": "2025-01-27T20:27:24.791Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WelcomeController.cs",
-              "DocumentMoniker": "C:\\C# Projects\\Assignment1\\Assignment1\\Controllers\\WelcomeController.cs",
-              "RelativeDocumentMoniker": "Assignment1\\Controllers\\WelcomeController.cs",
-              "ToolTip": "C:\\C# Projects\\Assignment1\\Assignment1\\Controllers\\WelcomeController.cs",
-              "RelativeToolTip": "Assignment1\\Controllers\\WelcomeController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAcwBUAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "KnockKnockController.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\Controllers\\KnockKnockController.cs",
+              "RelativeDocumentMoniker": "Assignment1\\Controllers\\KnockKnockController.cs",
+              "ToolTip": "C:\\Web Dev\\Backend-Development-Humber\\Assignments\\Assignment1\\Assignment1\\Assignment1\\Controllers\\KnockKnockController.cs",
+              "RelativeToolTip": "Assignment1\\Controllers\\KnockKnockController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T23:49:08.052Z",
+              "WhenOpened": "2025-01-27T20:26:23.737Z",
               "EditorCaption": ""
             }
           ]
