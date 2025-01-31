@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Assignment1",
-    "\\Assignment1\\Controllers"
+    "\\Assignment1\\Controllers",
+    "\\Assignment1\\Properties"
   ],
-  "SelectedNode": "\\Assignment1\\Controllers\\KnockKnockController.cs",
+  "SelectedNode": "\\Assignment1\\Controllers\\GreetingsController.cs",
   "PreviewInSolutionExplorer": false
 }

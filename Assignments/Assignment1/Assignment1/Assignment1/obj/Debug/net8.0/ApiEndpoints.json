@@ -2,7 +2,7 @@
   {
     "ContainingType": "Assignment1.Controllers.WelcomeController",
     "Method": "Get",
-    "RelativePath": "api/q1/Welcome",
+    "RelativePath": "api/q1/welcome",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -79,6 +79,115 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Assignment1.Controllers.Question5Controller",
+    "Method": "getSecret",
+    "RelativePath": "api/q5/secret",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "secret",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Assignment1.Controllers.Question6Controller",
+    "Method": "getHexagonArea",
+    "RelativePath": "api/q6/hexagon",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "side",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Double",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Assignment1.Controllers.Question7Controller",
+    "Method": "getAdjustedDate",
+    "RelativePath": "api/q7/timemachine",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "days",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Assignment1.Controllers.Question8Controller",
+    "Method": "getCheckoutSummary",
+    "RelativePath": "api/q8/squashfellows",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Small",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Large",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.String",
