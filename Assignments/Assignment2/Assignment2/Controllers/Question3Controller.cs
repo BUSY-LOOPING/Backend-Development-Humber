@@ -7,6 +7,16 @@ namespace Assignment2.Controllers
     [ApiController]
     public class Question3Controller : ControllerBase
     {
+        /// <summary>
+        /// Calculates the total Scoville Heat Units (SHU) for a list of chili pepper ingredients.
+        /// </summary>
+        /// <param name="Ingredients">A comma-separated list of chili pepper names.</param>
+        /// <returns>The total SHU for the given ingredients.</returns>
+        /// <example>
+        /// GET /api/J2/ChiliPeppers?Ingredients=Poblano,Cayenne,Thai,Poblano
+        /// 
+        /// Result: 118000
+        /// </example>
         [HttpGet(template: "ChiliPeppers")]
         public int GetSHU([FromQuery] string Ingredients)
         {
