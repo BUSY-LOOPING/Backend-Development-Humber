@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Search Student";
+}
+
+@model Cumulative1.Models.Student
+
+<h1>Search Student</h1>
+
+<form asp-action="Show" method="post">
+    <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input type="number" class="form-control" id="studentId" name="StudentId" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null)
+{
+    <h2>Student Details</h2>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <th>Student Number</th>
+            <td>@Model.StudentNumber</td>
+        </tr>
+        <tr>
+            <th>Enroll Date</th>
+            <td>@Model.EnrollDate</td>
+        </tr>
+    </table>
+}
+@if (ViewData["ErrorMessage"] != null)
+{
+    <p class="text-danger">@ViewData["ErrorMessage"]</p>
+}

@@ -56,5 +56,53 @@ namespace Cumulative1.Controllers
             }
             return Students;
         }
+
+        [HttpGet]
+        [Route(template: "ListStudentInfo")]
+        public ActionResult<Student> ListStudentInfo(int StudentId)
+        {
+            Student StudentInfo = null;
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                // Open a connection
+                Connection.Open();
+
+                //Establish a new command
+                MySqlCommand Command = Connection.CreateCommand();
+
+                //To prevent SQL Injection (REFERRED StackOverflow)
+                Command.CommandText = "SELECT * FROM students WHERE studentid = @StudentId";
+                Command.Parameters.AddWithValue("@StudentId", StudentId);
+
+
+                //Gather Result Set of Query into a variable
+                using (MySqlDataReader ResultSet = Command.ExecuteReader())
+                {
+                    //Loop Through Each Row of the Result Set
+                    if (ResultSet.Read())
+                    {
+
+                        int Id = ResultSet.GetInt32("studentid");
+                        string? FirstName = ResultSet["studentfname"].ToString();
+                        string? LastName = ResultSet["studentlname"].ToString();
+                        string? StudentNumber = ResultSet["studentnumber"].ToString();
+                        DateTime? EnrollDate = ResultSet.GetDateTime("enroldate");
+                        StudentInfo = new Student
+                        {
+                            Id = Id,
+                            FirstName = FirstName,
+                            LastName = LastName,
+                            StudentNumber = StudentNumber,
+                            EnrollDate = EnrollDate
+                        };
+                    }
+                }
+                if (StudentInfo == null)
+                {
+                    return NotFound($"Teacher with ID {StudentId} not found.");
+                }
+            }
+            return Ok(StudentInfo);
+        }
     }
 }
