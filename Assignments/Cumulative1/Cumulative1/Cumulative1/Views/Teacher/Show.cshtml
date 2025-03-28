@@ -1,0 +1,46 @@
+﻿@model Cumulative1.Models.Teacher
+
+<h1>Search Teacher</h1>
+
+<form asp-action="Show" method="post">
+    <div class="form-group">
+        <label for="teacherId">Teacher ID</label>
+        <input type="number" class="form-control" id="teacherId" name="TeacherId" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null)
+{
+    <h2>Teacher Details</h2>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <th>Employee Number</th>
+            <td>@Model.EmployeeNumber</td>
+        </tr>
+        <tr>
+            <th>Hire Date</th>
+            <td>@Model.HireDate</td>
+        </tr>
+        <tr>
+            <th>Salary</th>
+            <td>@Model.Salary</td>
+        </tr>
+    </table>
+}
+@if (ViewData["ErrorMessage"] != null)
+{
+    <p class="text-danger">@ViewData["ErrorMessage"]</p>
+}
