@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "All Students";
+    ViewData["Title"] = "All Courses";
 }
 
-@model List<Cumulative1.Models.Student>
+@model List<Cumulative1.Models.Course>
 
-<h1>Students</h1>
+<h1>Courses</h1>
 
 @if (Model == null || !Model.Any())
 {
@@ -16,21 +16,23 @@ else
         <thead>
             <tr>
                 <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Student Number</th>
-                <th>Enroll Date</th>
+                <th>Course Code</th>
+                <th>Teacher Id</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
+                <th>Course Name</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var teacher in Model)
+            @foreach (var course in Model)
             {
                     <tr>
-                        <td>@teacher.Id</td>
-                        <td>@teacher.FirstName</td>
-                        <td>@teacher.LastName</td>
-                        <td>@teacher.StudentNumber</td>
-                        <td>@teacher.EnrollDate</td>
+                        <td>@course.Id</td>
+                        <td>@course.CourseCode</td>
+                        <td>@course.TeacherId</td>
+                        <td>@course.StartDate</td>
+                        <td>@course.FinishDate</td>
+                        <td>@course.CourseName</td>
                     </tr>
             }
         </tbody>

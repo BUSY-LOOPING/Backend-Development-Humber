@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<SchoolDbContext>();
 builder.Services.AddScoped<TeacherAPIController>(); //important !!!!
 builder.Services.AddScoped<StudentAPIController>(); //important !!!!
+builder.Services.AddScoped<CourseAPIController>(); //important !!!!
 
 
 // Add services to the container.

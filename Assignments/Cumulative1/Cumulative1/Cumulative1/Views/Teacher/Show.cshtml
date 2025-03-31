@@ -1,4 +1,4 @@
-﻿@model Cumulative1.Models.Teacher
+﻿@model Cumulative1.Models.TeacherDetailsViewModel
 
 <h1>Search Teacher</h1>
 
@@ -10,36 +10,67 @@
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
-@if (Model != null)
+@if (Model?.Teacher != null)
 {
     <h2>Teacher Details</h2>
     <table class="table">
         <tr>
             <th>Id</th>
-            <td>@Model.Id</td>
+            <td>@Model.Teacher.Id</td>
         </tr>
         <tr>
             <th>First Name</th>
-            <td>@Model.FirstName</td>
+            <td>@Model.Teacher.FirstName</td>
         </tr>
         <tr>
             <th>Last Name</th>
-            <td>@Model.LastName</td>
+            <td>@Model.Teacher.LastName</td>
         </tr>
         <tr>
             <th>Employee Number</th>
-            <td>@Model.EmployeeNumber</td>
+            <td>@Model.Teacher.EmployeeNumber</td>
         </tr>
         <tr>
             <th>Hire Date</th>
-            <td>@Model.HireDate</td>
+            <td>@Model.Teacher.HireDate</td>
         </tr>
         <tr>
             <th>Salary</th>
-            <td>@Model.Salary</td>
+            <td>@Model.Teacher.Salary</td>
         </tr>
     </table>
+
+    <h2>Courses Taught</h2>
+    @if (Model.Courses != null && Model.Courses.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model.Courses)
+                {
+                    <tr>
+                        <td>@course.Id</td>
+                        <td>@course.CourseName</td>
+                        <td>@course.StartDate</td>
+                        <td>@course.FinishDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No courses found for this teacher.</p>
+    }
 }
+
 @if (ViewData["ErrorMessage"] != null)
 {
     <p class="text-danger">@ViewData["ErrorMessage"]</p>

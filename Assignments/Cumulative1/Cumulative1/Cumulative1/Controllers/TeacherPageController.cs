@@ -6,9 +6,11 @@ namespace Cumulative1.Controllers
     public class TeacherPageController : Controller
     {
         private readonly TeacherAPIController _api;
-        public TeacherPageController(TeacherAPIController api)
+        private readonly CourseAPIController _courseAPI;
+        public TeacherPageController(TeacherAPIController api, CourseAPIController courseAPI)
         {
             _api = api;
+            _courseAPI = courseAPI;
         }
 
 
@@ -53,15 +55,26 @@ namespace Cumulative1.Controllers
         [HttpPost]
         public IActionResult Show(int TeacherId)
         {
-            ActionResult<Teacher> result = _api.ListTeacherInfo(TeacherId);
-            if (result.Result is NotFoundObjectResult)
+            ActionResult<Teacher> teacherResult = _api.ListTeacherInfo(TeacherId);
+            if (teacherResult.Result is NotFoundObjectResult)
             {
                 Console.WriteLine("Error");
                 ViewData["ErrorMessage"] = $"Teacher with ID {TeacherId} not found.";
                 return View("~/Views/Teacher/Show.cshtml");
             }
-            
-            return View("~/Views/Teacher/Show.cshtml", ((OkObjectResult)result.Result).Value); 
+
+            var teacher = ((OkObjectResult)teacherResult.Result).Value as Teacher;
+
+            var coursesResult = _courseAPI.ListCoursesByTeacherId(TeacherId);
+            var courses = ((OkObjectResult)coursesResult.Result).Value as List<Course>;
+
+            var viewModel = new TeacherDetailsViewModel
+            {
+                Teacher = teacher,
+                Courses = courses
+            };
+
+            return View("~/Views/Teacher/Show.cshtml", viewModel); 
             //first do not take result.Value -> this is null
         }
     }

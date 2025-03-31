@@ -1,42 +1,46 @@
 ﻿@{
-    ViewData["Title"] = "Search Student";
+    ViewData["Title"] = "Search Course";
 }
 
-@model Cumulative1.Models.Student
+@model Cumulative1.Models.Course
 
-<h1>Search Student</h1>
+<h1>Search Course</h1>
 
 <form asp-action="Show" method="post">
     <div class="form-group">
-        <label for="studentId">Student ID</label>
-        <input type="number" class="form-control" id="studentId" name="StudentId" required />
+        <label for="courseId">Course ID</label>
+        <input type="number" class="form-control" id="courseId" name="CourseId" required />
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
 @if (Model != null)
 {
-    <h2>Student Details</h2>
+    <h2>Course Details</h2>
     <table class="table">
         <tr>
             <th>Id</th>
             <td>@Model.Id</td>
         </tr>
         <tr>
-            <th>First Name</th>
-            <td>@Model.FirstName</td>
+            <th>Course Code</th>
+            <td>@Model.CourseCode</td>
         </tr>
         <tr>
-            <th>Last Name</th>
-            <td>@Model.LastName</td>
+            <th>Teacher Id</th>
+            <td>@Model.TeacherId</td>
         </tr>
         <tr>
-            <th>Student Number</th>
-            <td>@Model.StudentNumber</td>
+            <th>Start Date</th>
+            <td>@Model.StartDate</td>
         </tr>
         <tr>
-            <th>Enroll Date</th>
-            <td>@Model.EnrollDate</td>
+            <th>Finish Date</th>
+            <td>@Model.FinishDate</td>
+        </tr>
+        <tr>
+            <th>Course Name</th>
+            <td>@Model.CourseName</td>
         </tr>
     </table>
 }

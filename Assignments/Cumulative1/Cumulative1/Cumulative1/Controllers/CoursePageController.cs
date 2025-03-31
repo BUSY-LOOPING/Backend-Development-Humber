@@ -38,8 +38,8 @@ namespace Cumulative1.Controllers
             if (result.Result is NotFoundObjectResult)
             {
                 Console.WriteLine("Error");
-                ViewData["ErrorMessage"] = $"Student with ID {CourseId} not found.";
-                return View("~/Views/Student/Show.cshtml");
+                ViewData["ErrorMessage"] = $"Course with ID {CourseId} not found.";
+                return View("~/Views/Course/Show.cshtml");
             }
 
             return View("~/Views/Course/Show.cshtml", ((OkObjectResult)result.Result).Value);
