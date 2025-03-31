@@ -11,12 +11,30 @@ namespace Cumulative1.Controllers
             _api = api;
         }
 
+        /// <summary>
+        /// Displays the Course Index view.
+        /// </summary>
+        /// <returns>
+        /// An IActionResult representing the Course index view.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/CoursePage/Index -> "Index view rendered"
+        /// </example>
         [HttpGet]
         public IActionResult Index()
         {
             return View("~/Views/Course/Index.cshtml");
         }
 
+        /// <summary>
+        /// Retrieves all courses from the API and displays them in the Course List view.
+        /// </summary>
+        /// <returns>
+        /// An IActionResult containing a view with a list of Course objects.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/CoursePage/List -> "List View rendered"
+        /// </example>
         [HttpGet]
         public IActionResult List()
         {
@@ -25,6 +43,15 @@ namespace Cumulative1.Controllers
             return View("~/Views/Course/List.cshtml", courses);
         }
 
+        /// <summary>
+        /// Displays the Course Search view where a course can be looked up by its ID.
+        /// </summary>
+        /// <returns>
+        /// An IActionResult representing the Course search form view.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/CoursePage/Show -> "Search form rendered"
+        /// </example>
         [HttpGet]
         public IActionResult Show()
         {

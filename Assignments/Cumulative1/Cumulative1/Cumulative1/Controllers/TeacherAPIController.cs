@@ -14,6 +14,15 @@ namespace Cumulative1.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Retrieves a list of all teachers from the database.
+        /// </summary>
+        /// <returns>
+        /// A list of Teacher objects representing all teachers.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/api/Teacher/ListAllTeacherInfo -> [{...}, {...}, ...]
+        /// </example>
         [HttpGet]
         [Route(template: "ListAllTeacherInfo")]
         public List<Teacher> ListAllTeacherInfo()
@@ -58,6 +67,17 @@ namespace Cumulative1.Controllers
             return Teachers;
         }
 
+        /// <summary>
+        /// Retrieves a list of teachers whose hire dates fall between the specified start and end dates.
+        /// </summary>
+        /// <param name="FilterDateStart">The start date for filtering teacher hire dates.</param>
+        /// <param name="FilterDateEnd">The end date for filtering teacher hire dates.</param>
+        /// <returns>
+        /// An ActionResult containing a list of Teacher objects if found; otherwise, a NotFound result with a message.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/api/Teacher/ListAllTeacherInfoBtwDates?FilterDateStart=2016-01-01&FilterDateEnd=2017-12-03 -> [{...}, {...}, ...]
+        /// </example>
         [HttpGet]
         [Route(template: "ListAllTeacherInfoBtwDates")]
         public ActionResult<List<Teacher>> ListAllTeacherInfoBtwDates(DateTime FilterDateStart, DateTime FilterDateEnd)
@@ -108,6 +128,16 @@ namespace Cumulative1.Controllers
             return Ok(Teachers);
         }
 
+        /// <summary>
+        /// Retrieves information for a specific teacher by the given TeacherId.
+        /// </summary>
+        /// <param name="TeacherId">The unique identifier of the teacher.</param>
+        /// <returns>
+        /// An ActionResult containing the Teacher object if found; otherwise, a NotFound result with an error message.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/api/Teacher/ListTeacherInfo?TeacherId=1 -> {...}
+        /// </example>
         [HttpGet]
         [Route(template: "ListTeacherInfo")]
         public ActionResult<Teacher> ListTeacherInfo(int TeacherId)

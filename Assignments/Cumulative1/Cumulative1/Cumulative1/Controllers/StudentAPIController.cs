@@ -15,6 +15,15 @@ namespace Cumulative1.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Retrieves a list of all students from the database.
+        /// </summary>
+        /// <returns>
+        /// A list of Student objects.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/api/Student/ListAllStudentInfo -> [{...}, {...}, ...]
+        /// </example>
         [HttpGet]
         [Route(template: "ListAllStudentInfo")]
         public List<Student> ListAllStudentInfo()
@@ -57,6 +66,16 @@ namespace Cumulative1.Controllers
             return Students;
         }
 
+        /// <summary>
+        /// Retrieves information for a specific student by the student ID.
+        /// </summary>
+        /// <param name="StudentId">The unique identifier of the student.</param>
+        /// <returns>
+        /// An ActionResult containing the student details if found; otherwise, a NotFound result.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/api/Student/ListStudentInfo?StudentId=1 ->{"id":1,"firstName":"Sarah",...}
+        /// </example>
         [HttpGet]
         [Route(template: "ListStudentInfo")]
         public ActionResult<Student> ListStudentInfo(int StudentId)
@@ -70,7 +89,7 @@ namespace Cumulative1.Controllers
                 //Establish a new command
                 MySqlCommand Command = Connection.CreateCommand();
 
-                //To prevent SQL Injection (REFERRED StackOverflow)
+                //To prevent SQL Injection (REFERRED StackOverflow
                 Command.CommandText = "SELECT * FROM students WHERE studentid = @StudentId";
                 Command.Parameters.AddWithValue("@StudentId", StudentId);
 

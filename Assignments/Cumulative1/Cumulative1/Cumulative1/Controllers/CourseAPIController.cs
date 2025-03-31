@@ -121,7 +121,7 @@ namespace Cumulative1.Controllers
                 }
                 if (CourseInfo == null)
                 {
-                    return NotFound($"Teacher with ID {CourseId} not found.");
+                    return NotFound($"Course with ID {CourseId} not found.");
                 }
             }
             return Ok(CourseInfo);
@@ -136,11 +136,10 @@ namespace Cumulative1.Controllers
         /// representing the courses taught by the specified teacher.
         /// </returns>
         /// <example>
-        /// <code>
         /// GET: https://localhost:xx/api/Course/ListCoursesByTeacherId?TeacherId=1
-        /// </code>
         /// </example>
         [HttpGet]
+        [Route(template: "ListCoursesByTeacherId")]
         public ActionResult<List<Course>> ListCoursesByTeacherId(int TeacherId)
         {
             List<Course> Courses = new List<Course>();

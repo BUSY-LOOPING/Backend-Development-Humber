@@ -13,13 +13,32 @@ namespace Cumulative1.Controllers
             _courseAPI = courseAPI;
         }
 
-
+        /// <summary>
+        /// Displays the Teacher index view.
+        /// </summary>
+        /// <returns>
+        /// An IActionResult representing the Teacher index view.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/TeacherPage/Index -> "Index view rendered"
+        /// </example>
         [HttpGet]
         public IActionResult Index()
         {
             return View("~/Views/Teacher/Index.cshtml");
         }
 
+        /// <summary>
+        /// Retrieves a list of teachers, optionally filtered by a hire date range, and displays them in the Teacher List view.
+        /// </summary>
+        /// <param name="startDate">The optional start date to filter teachers by their hire date.</param>
+        /// <param name="endDate">The optional end date to filter teachers by their hire date.</param>
+        /// <returns>
+        /// An IActionResult containing a view with a list of Teacher objects.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/TeacherPage/List?startDate=2020-01-01&endDate=2020-12-31 -> "Rendered List Page"
+        /// </example>
         [HttpGet]
         public IActionResult List(DateTime? startDate, DateTime? endDate)
         {
@@ -46,12 +65,33 @@ namespace Cumulative1.Controllers
             return View("~/Views/Teacher/List.cshtml", teachers);
         }
 
+        /// <summary>
+        /// Displays the Teacher search view where a teacher can be looked up by their ID.
+        /// </summary>
+        /// <returns>
+        /// AnIActionResult representing the Teacher search form view.
+        /// </returns>
+        /// <example>
+        /// GET: https://localhost:xx/TeacherPage/Show -> "Search form rendered"
+        /// </example>
         [HttpGet]
         public IActionResult Show()
         {
             return View("~/Views/Teacher/Show.cshtml");
         }
 
+        /// <summary>
+        /// Retrieves detailed teacher information along with the list of courses taught by that teacher
+        /// </summary>
+        /// <param name="TeacherId">The unique identifier of the teacher to retrieve.</param>
+        /// <returns>
+        /// An IActionResult containing the Teacher details view with associated courses if found; 
+        /// otherwise, the search view with an error message.
+        /// </returns>
+        /// <example>
+        /// POST: https://localhost:xx/TeacherPage/Show
+        /// DATA: TeacherId=1
+        /// </example>
         [HttpPost]
         public IActionResult Show(int TeacherId)
         {
@@ -74,7 +114,7 @@ namespace Cumulative1.Controllers
                 Courses = courses
             };
 
-            return View("~/Views/Teacher/Show.cshtml", viewModel); 
+            return View("~/Views/Teacher/Show.cshtml", viewModel);
             //first do not take result.Value -> this is null
         }
     }
