@@ -165,7 +165,7 @@ namespace Cumulative1.Controllers
                     //Loop Through Each Row of the Result Set
                     if (ResultSet.Read())
                     {
-                        
+
                         int Id = ResultSet.GetInt32("teacherid");
                         string? FirstName = ResultSet["teacherfname"].ToString();
                         string? LastName = ResultSet["teacherlname"].ToString();
@@ -189,6 +189,100 @@ namespace Cumulative1.Controllers
                 }
             }
             return Ok(TeacherInfo);
+        }
+
+        [HttpPost]
+        [Route("AddTeacher")]
+        public ActionResult<Teacher> AddTeacher([FromForm] Teacher teacher)
+        {
+            try
+            {
+                using (MySqlConnection connection = _context.AccessDatabase())
+                {
+                    connection.Open();
+
+                    // Check if a teacher with the same EmployeeNumber already exists
+                    MySqlCommand checkCommand = connection.CreateCommand();
+                    checkCommand.CommandText = "SELECT COUNT(*) FROM teachers WHERE employeenumber = @EmployeeNumber";
+                    checkCommand.Parameters.AddWithValue("@EmployeeNumber", teacher.EmployeeNumber);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return Conflict($"A teacher with Employee Number {teacher.EmployeeNumber} already exists.");
+                    }
+
+                    // Insert new teacher
+                    MySqlCommand insertCommand = connection.CreateCommand();
+                    insertCommand.CommandText =
+                        @"INSERT INTO teachers (teacherid, teacherfname, teacherlname, employeenumber, hiredate, salary) 
+              VALUES (@TeacherId, @FirstName, @LastName, @EmployeeNumber, @HireDate, @Salary)";
+                    insertCommand.Parameters.AddWithValue("@TeacherId", teacher.Id);
+                    insertCommand.Parameters.AddWithValue("@FirstName", teacher.FirstName);
+                    insertCommand.Parameters.AddWithValue("@LastName", teacher.LastName);
+                    insertCommand.Parameters.AddWithValue("@EmployeeNumber", teacher.EmployeeNumber);
+                    insertCommand.Parameters.AddWithValue("@HireDate", teacher.HireDate);
+                    insertCommand.Parameters.AddWithValue("@Salary", teacher.Salary);
+
+                    int rowsAffected = insertCommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        // Return 201 == Created successfully
+                        // return CreatedAtAction(nameof(ListTeacherInfo), new { TeacherId = teacher.Id }, teacher);
+                        return StatusCode(201, teacher);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "An error occurred while adding the teacher.");
+                    }
+                }
+            }catch (Exception ex)
+            {
+                return StatusCode(500, "Something went wrong: " + ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route(template:"DeleteTeacher")]
+        public ActionResult DeleteTeacher(int Id)
+        {
+            try
+            {
+                using (MySqlConnection connection = _context.AccessDatabase())
+                {
+                    connection.Open();
+
+                    // Check if the teacher exists
+                    MySqlCommand checkCommand = connection.CreateCommand();
+                    checkCommand.CommandText = "SELECT COUNT(*) FROM teachers WHERE teacherid = @TeacherId";
+                    checkCommand.Parameters.AddWithValue("@TeacherId", Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        return NotFound($"No teacher found with ID {Id}.");
+                    }
+                        
+                    // Delete the teacher
+                    MySqlCommand deleteCommand = connection.CreateCommand();
+                    deleteCommand.CommandText = "DELETE FROM teachers WHERE teacherid = @TeacherId";
+                    deleteCommand.Parameters.AddWithValue("@TeacherId", Id);
+
+                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return Ok($"Teacher with ID {Id} has been deleted."); //status code 200. can also use status code 204
+                    }
+                    else
+                    {
+                        return StatusCode(500, "An error occurred while deleting the teacher.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Something went wrong: {ex.Message}");
+            }
         }
     }
 }
