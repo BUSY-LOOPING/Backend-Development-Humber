@@ -1,4 +1,5 @@
-﻿using Cumulative1.Models;
+﻿using System.Text.RegularExpressions;
+using Cumulative1.Models;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
@@ -191,44 +192,92 @@ namespace Cumulative1.Controllers
             return Ok(TeacherInfo);
         }
 
+        /// <summary>
+        /// Adds a new teacher to the database.
+        /// </summary>
+        /// <param name="FirstName">The first name of the teacher.</param>
+        /// <param name="LastName">The last name of the teacher (optional).</param>
+        /// <param name="EmployeeNumber">The unique employee number of the teacher.</param>
+        /// <param name="HireDate">The hire date of the teacher (optional).</param>
+        /// <param name="Salary">The salary of the teacher (optional).</param>
+        /// <returns>
+        /// An ActionResult indicating the result of the operation. Returns a 201 status code if the teacher is added successfully,
+        /// a 409 status code if a teacher with the same employee number already exists, or a 500 status code if an error occurs.
+        /// </returns>
+        /// <example>
+        /// POST: https://localhost:xx/api/Teacher/AddTeacher
+        /// Body: { "FirstName": "John", "LastName": "Doe", "EmployeeNumber": "T123", "HireDate": "2025-04-07", "Salary": 30.55 }
+        /// RESPONSE : New Teacher Added!
+        /// </example>
         [HttpPost]
         [Route("AddTeacher")]
-        public ActionResult<Teacher> AddTeacher([FromForm] Teacher teacher)
+        public ActionResult AddTeacher(
+            string? FirstName, 
+            string? LastName,
+            string? EmployeeNumber,
+            DateTime? HireDate,
+            decimal? Salary)
         {
             try
             {
-                using (MySqlConnection connection = _context.AccessDatabase())
+                //CODE 400 : Bad Request
+                if (string.IsNullOrEmpty(FirstName))
+                {
+                    return StatusCode(400, "Missing First Name!");
+                }
+                if (string.IsNullOrEmpty(EmployeeNumber))
+                {
+                    return StatusCode(400, "Missing Employee Number!");
+                }
+                if (!EmployeeNumber.StartsWith("T"))
+                {
+                    return StatusCode(400, "Employee Number must start with 'T'!");
+                }
+                if (!Regex.IsMatch(EmployeeNumber.Substring(1), @"^\d+$"))
+                {
+                    return StatusCode(400, "Employee Number must be followed by numeric digits only.");
+                }
+                if (Salary != null && !Regex.IsMatch(Salary.ToString(), @"^\d+(\.\d{1,2})?$"))
+                {
+                    return StatusCode(400, "Salary must only be in numeric!");
+                }
+                if (HireDate != null && HireDate.Value > DateTime.Now)
+                {
+                    return StatusCode(400, "Hire Date cannot be in future!");
+                }
+
+
+
+                    using (MySqlConnection connection = _context.AccessDatabase())
                 {
                     connection.Open();
 
                     // Check if a teacher with the same EmployeeNumber already exists
                     MySqlCommand checkCommand = connection.CreateCommand();
                     checkCommand.CommandText = "SELECT COUNT(*) FROM teachers WHERE employeenumber = @EmployeeNumber";
-                    checkCommand.Parameters.AddWithValue("@EmployeeNumber", teacher.EmployeeNumber);
+                    checkCommand.Parameters.AddWithValue("@EmployeeNumber", EmployeeNumber);
                     int count = Convert.ToInt32(checkCommand.ExecuteScalar());
                     if (count > 0)
                     {
-                        return Conflict($"A teacher with Employee Number {teacher.EmployeeNumber} already exists.");
+                        return Conflict($"A teacher with Employee Number {EmployeeNumber} already exists.");
                     }
 
                     // Insert new teacher
                     MySqlCommand insertCommand = connection.CreateCommand();
                     insertCommand.CommandText =
-                        @"INSERT INTO teachers (teacherid, teacherfname, teacherlname, employeenumber, hiredate, salary) 
-              VALUES (@TeacherId, @FirstName, @LastName, @EmployeeNumber, @HireDate, @Salary)";
-                    insertCommand.Parameters.AddWithValue("@TeacherId", teacher.Id);
-                    insertCommand.Parameters.AddWithValue("@FirstName", teacher.FirstName);
-                    insertCommand.Parameters.AddWithValue("@LastName", teacher.LastName);
-                    insertCommand.Parameters.AddWithValue("@EmployeeNumber", teacher.EmployeeNumber);
-                    insertCommand.Parameters.AddWithValue("@HireDate", teacher.HireDate);
-                    insertCommand.Parameters.AddWithValue("@Salary", teacher.Salary);
+                        @"INSERT INTO teachers (teacherfname, teacherlname, employeenumber, hiredate, salary) 
+              VALUES (@FirstName, @LastName, @EmployeeNumber, @HireDate, @Salary)";
+                    insertCommand.Parameters.AddWithValue("@FirstName", FirstName);
+                    insertCommand.Parameters.AddWithValue("@LastName", LastName);
+                    insertCommand.Parameters.AddWithValue("@EmployeeNumber", EmployeeNumber);
+                    insertCommand.Parameters.AddWithValue("@HireDate", HireDate);
+                    insertCommand.Parameters.AddWithValue("@Salary", Salary);
 
                     int rowsAffected = insertCommand.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
                         // Return 201 == Created successfully
-                        // return CreatedAtAction(nameof(ListTeacherInfo), new { TeacherId = teacher.Id }, teacher);
-                        return StatusCode(201, teacher);
+                        return StatusCode(201, "New Teacher Added!");
                     }
                     else
                     {
@@ -241,6 +290,18 @@ namespace Cumulative1.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a teacher from the database based on the teacher ID.
+        /// </summary>
+        /// <param name="Id">The unique ID of the teacher to be deleted.</param>
+        /// <returns>
+        /// An ActionResult indicating the result of the operation. Returns a 200 status code if the teacher is deleted successfully,
+        /// a 404 status code if no teacher with the specified ID is found, or a 500 status code if an error occurs.
+        /// </returns>
+        /// <example>
+        /// DELETE: https://localhost:xx/api/Teacher/DeleteTeacher?Id=1
+        /// RESPONSE : Teacher with ID 1 has been deleted.
+        /// </example>
         [HttpDelete]
         [Route(template:"DeleteTeacher")]
         public ActionResult DeleteTeacher(int Id)

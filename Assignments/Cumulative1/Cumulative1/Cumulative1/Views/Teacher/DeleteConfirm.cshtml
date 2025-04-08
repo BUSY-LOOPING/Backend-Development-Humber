@@ -1,0 +1,23 @@
+﻿@model Cumulative1.Models.ViewModels.DeleteTeacherViewModel
+
+@{
+    ViewData["Title"] = "Delete Teacher";
+}
+
+<h1>Delete Teacher</h1>
+
+@if (Model != null)
+{
+    <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
+        @Model.Message
+    </div>
+}
+
+<form asp-action="Delete" method="post" class="mb-3">
+    <div class="form-group">
+        <label for="TeacherId">Teacher ID*</label>
+        <input id="TeacherId" name="TeacherId" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Cumulative1.Models.ViewModels.NewTeacherViewModel
+
 @{
+    ViewData["Title"] = "New Teacher";
 }
+
+<h1>New Teacher</h1>
+
+@if (Model != null)
+{
+    <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
+        @Model.Message
+    </div>
+}
+
+<form asp-action="New" method="post" class="mb-3">
+    <div class="form-group">
+        <label for="FirstName">First Name*</label>
+        <input name="FirstName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input name="LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="EmployeeNumber">Employee Number*</label>
+        <input name="EmployeeNumber" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="HireDate">Hire Date</label>
+        <input name="HireDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Salary">Salary</label>
+        <input name="Salary" type="number" step="0.01" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

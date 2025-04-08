@@ -1,4 +1,5 @@
 ﻿using Cumulative1.Models;
+using Cumulative1.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cumulative1.Controllers
@@ -117,5 +118,62 @@ namespace Cumulative1.Controllers
             return View("~/Views/Teacher/Show.cshtml", viewModel);
             //first do not take result.Value -> this is null
         }
+
+
+        [HttpGet]
+        public IActionResult New()
+        {
+            return View("~/Views/Teacher/New.cshtml");
+        }
+
+        [HttpPost]
+        public IActionResult New(
+            [FromForm] string FirstName,
+            [FromForm] string? LastName,
+            [FromForm] string EmployeeNumber,
+            [FromForm] DateTime? HireDate,
+            [FromForm] decimal? Salary)
+        {
+            var teacherResult = (ObjectResult)_api.AddTeacher(FirstName, 
+                LastName, EmployeeNumber, HireDate, Salary);
+            var viewModel = new NewTeacherViewModel();
+
+            if (teacherResult.StatusCode != 201)
+            {
+                viewModel.Message = teacherResult.Value?.ToString() ?? "An unknown error occurred.";
+                viewModel.IsSuccess = false;
+                return View("~/Views/Teacher/New.cshtml", viewModel);
+            } 
+
+            viewModel.Message = "Teacher added successfully!";
+            viewModel.IsSuccess = true;
+            return View("~/Views/Teacher/New.cshtml", viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View("~/Views/Teacher/DeleteConfirm.cshtml");
+        }
+
+        [HttpPost]
+        public IActionResult Delete([FromForm] int TeacherId)
+        {
+            var teacherResult = (ObjectResult)_api.DeleteTeacher(TeacherId);
+            var viewModel = new DeleteTeacherViewModel();
+
+            if (teacherResult.StatusCode != 200)
+            {
+                viewModel.Message = teacherResult.Value?.ToString() ?? "An unknown error occurred.";
+                viewModel.IsSuccess = false;
+                return View("~/Views/Teacher/DeleteConfirm.cshtml", viewModel);
+            }
+
+            viewModel.Message = $"Teacher with Id {TeacherId} Deleted!";
+            viewModel.IsSuccess = true;
+            return View("~/Views/Teacher/DeleteConfirm.cshtml", viewModel);
+        }
+    
     }
+
 }
