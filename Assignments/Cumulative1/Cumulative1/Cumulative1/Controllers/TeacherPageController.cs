@@ -1,4 +1,5 @@
-﻿using Cumulative1.Models;
+﻿using System.Diagnostics;
+using Cumulative1.Models;
 using Cumulative1.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,6 +44,10 @@ namespace Cumulative1.Controllers
         [HttpGet]
         public IActionResult List(DateTime? startDate, DateTime? endDate)
         {
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+
             List<Teacher> teachers = new List<Teacher>();
 
             if (startDate.HasValue && endDate.HasValue)
@@ -173,7 +178,24 @@ namespace Cumulative1.Controllers
             viewModel.IsSuccess = true;
             return View("~/Views/Teacher/DeleteConfirm.cshtml", viewModel);
         }
-    
+
+        [HttpGet]
+        public IActionResult Edit(int TeacherId)
+        {
+            var teacherResponse = _api.ListTeacherInfo(TeacherId);
+            if (teacherResponse.Result is NotFoundObjectResult || teacherResponse == null)
+            {
+                return View("~/Views/Teacher/Edit.cshtml");
+            }
+
+            Teacher teacher = ((OkObjectResult)teacherResponse.Result).Value as Teacher;
+            UpdateTeacherViewModel viewModel = new UpdateTeacherViewModel
+            {
+                Teacher = teacher
+            };
+            return View("~/Views/Teacher/Edit.cshtml", viewModel);
+        }
+
     }
 
 }

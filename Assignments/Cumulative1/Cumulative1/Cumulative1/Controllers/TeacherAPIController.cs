@@ -345,5 +345,98 @@ namespace Cumulative1.Controllers
                 return StatusCode(500, $"Something went wrong: {ex.Message}");
             }
         }
+
+        /// <summary>
+        /// Updates the details of an existing teacher in the database.
+        /// </summary>
+        /// <param name="teacher">A Teacher object containing the updated details of the teacher.</param>
+        /// <returns>
+        /// An ActionResult indicating the result of the operation. Returns:
+        /// - A 200 status code if the teacher is updated successfully.
+        /// - A 400 status code if any validation fails (e.g., missing required fields, invalid data).
+        /// - A 404 status code if no teacher with the specified ID is found.
+        /// - A 500 status code if an error occurs during the update process.
+        /// </returns>
+        /// <example>
+        /// POST: https://localhost:xx/api/Teacher/UpdateTeacher
+        /// Body: 
+        /// {
+        ///   "Id": 11,
+        ///   "FirstName": "John",
+        ///   "LastName": "Doe",
+        ///   "EmployeeNumber": "T123",
+        ///   "HireDate": "2020-01-01",
+        ///   "Salary": 50.00
+        /// }
+        /// RESPONSE: Teacher with ID 11 updated successfully.
+        [HttpPost]
+        [Route(template: "UpdateTeacher")]
+        public ActionResult UpdateTeacher([FromForm] Teacher teacher)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(teacher.FirstName))
+                {
+                    return StatusCode(400, "First Name is required.");
+                }
+                if (teacher.HireDate != null && teacher.HireDate.Value > DateTime.Now)
+                {
+                    return StatusCode(400, "Hire Date cannot be in future!");
+                }
+                if (teacher.Salary != null && teacher.Salary < 0)
+                {
+                    return StatusCode(400, "Salary cannot be negative!");
+                }
+                using (MySqlConnection connection = _context.AccessDatabase())
+                {
+                    connection.Open();
+
+                    // Check if the teacher exists
+                    MySqlCommand checkCommand = connection.CreateCommand();
+                    checkCommand.CommandText = "SELECT COUNT(*) FROM teachers WHERE teacherid = @TeacherId";
+                    checkCommand.Parameters.AddWithValue("@TeacherId", teacher.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        return NotFound($"No teacher found with ID {teacher.Id}.");
+                    }
+
+                    // Update the teacher
+                    MySqlCommand updateCommand = connection.CreateCommand();
+                    updateCommand.CommandText = @"
+                        UPDATE teachers 
+                        SET teacherfname = @FirstName, 
+                            teacherlname = @LastName, 
+                            employeenumber = @EmployeeNumber, 
+                            hiredate = @HireDate, 
+                            salary = @Salary 
+                        WHERE teacherid = @TeacherId";
+
+                    updateCommand.Parameters.AddWithValue("@FirstName", teacher.FirstName);
+                    updateCommand.Parameters.AddWithValue("@LastName", teacher.LastName);
+                    updateCommand.Parameters.AddWithValue("@EmployeeNumber", teacher.EmployeeNumber);
+                    updateCommand.Parameters.AddWithValue("@HireDate", teacher.HireDate);
+                    updateCommand.Parameters.AddWithValue("@Salary", teacher.Salary);
+                    updateCommand.Parameters.AddWithValue("@TeacherId", teacher.Id);
+
+                    int rowsAffected = updateCommand.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return Ok($"Teacher with ID {teacher.Id} updated successfully.");
+                    }
+                    else
+                    {
+                        return StatusCode(500, "An error occurred while updating the teacher.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Something went wrong");
+            }
+        }
+
     }
 }

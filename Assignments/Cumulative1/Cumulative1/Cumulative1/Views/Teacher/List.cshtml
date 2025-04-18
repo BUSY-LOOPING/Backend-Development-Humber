@@ -34,6 +34,7 @@ else
             <th>Employee Number</th>
             <th>Hire Date</th>
             <th>Salary</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -46,6 +47,9 @@ else
                 <td>@teacher.EmployeeNumber</td>
                 <td>@teacher.HireDate</td>
                 <td>@teacher.Salary</td>
+                    <td>
+                        <a asp-controller="TeacherPage" asp-action="Edit" asp-route-TeacherId="@teacher.Id" class="btn btn-sm btn-warning">Edit</a>
+                    </td>
             </tr>
         }
     </tbody>

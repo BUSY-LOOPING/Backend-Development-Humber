@@ -1,0 +1,91 @@
+﻿@model Cumulative1.Models.ViewModels.UpdateTeacherViewModel
+@{
+    ViewData["Title"] = "Edit Teacher";
+}
+
+<h2>Edit Teacher</h2>
+<div class="alert" id="updateMessage"></div>
+
+@if (Model != null) 
+{
+    if (Model.Teacher != null)
+    {
+        <form id="editTeacherForm" asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Teacher.Id" />
+
+            <div class="form-group">
+                <label asp-for="Teacher.FirstName"></label>
+                <input asp-for="Teacher.FirstName" class="form-control" required/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Teacher.LastName"></label>
+                <input asp-for="Teacher.LastName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Teacher.EmployeeNumber"></label>
+                <input asp-for="Teacher.EmployeeNumber" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Teacher.HireDate"></label>
+                <input asp-for="Teacher.HireDate" class="form-control" type="date" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Teacher.Salary"></label>
+                <input asp-for="Teacher.Salary" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $("#editTeacherForm").submit(function (e) {
+                e.preventDefault();
+
+                let isValid = true;
+                let errorMessage = "";
+                const firstName = $('input[name="Teacher.FirstName"]').val().trim();
+                const salary = parseFloat($('input[name="Teacher.Salary"]').val());
+                const hireDate = new Date($('input[name="Teacher.HireDate"]').val());
+                const today = new Date();
+
+                // First Name validation
+                if (firstName === "") {
+                    errorMessage += "First Name is required.<br/>";
+                    isValid = false;
+                }
+
+                // Salary validation
+                if (!isNaN(salary) && salary < 0) {
+                    errorMessage += "Salary cannot be less than 0.<br/>";
+                    isValid = false;
+                }
+
+                // Hire Date validation
+                if (hireDate > today) {
+                    errorMessage += "Hire date cannot be in the future.<br/>";
+                    isValid = false;
+                }
+                if (!isValid) {
+                    $("#updateMessage").html("Error: " + errorMessage);
+                    $("#updateMessage").removeClass("alert-success").addClass("alert-danger");
+                    return;
+                }
+                
+                $.post('@Url.Action("UpdateTeacher", "TeacherAPI")', $(this).serialize())
+                    .done(function (response) {
+                        $("#updateMessage").text("Teacher details updated successfully!");
+                        $("#updateMessage").removeClass("alert-danger").addClass("alert-success");
+                    })
+                    .fail(function (xhr) {
+                        $("#updateMessage").text("Error: " + xhr.responseText);
+                        $("#updateMessage").removeClass("alert-success").addClass("alert-danger");
+                    });
+            });
+        </script>
+    } 
+}
